@@ -3,7 +3,7 @@
 # Submission Date: 10/29/24
 # Lab 07
 # Lab Section: 11
-# Sources, people worked with, help given to: 
+# Sources, people worked with, help given to: ChatGPT for clarification, definitions, and rephrasing of concepts
 # your
 # comments
 # here
@@ -17,11 +17,10 @@
     # If a user did not enter a number output a statement saying so
 # You will continue to prompt the user until a proper integer value is entered
 
-factorial = 1
+#factorial = 1
+#print(f"The result of the factorial based on the given bound is {factorial}")
+#print("*"*75)
 
-print(f"The result of the factorial based on the given bound is {factorial}")
-
-print("*"*75)
 # Create a while loop that prompts a user for input of an integer values
 # Sum all inputs. When the user enters 'exit' (regardless of casing) end the loop
 # Upon ending the loop print the sum
@@ -37,11 +36,10 @@ print("*"*75)
 # All this together means you will have an intensive while loop that includes multiple if statements, likely with some nesting 
 # The sum should start at 0 
 
-num_sum = 0 
+#num_sum = 0 
+#print(f"Your final sum is {num_sum}")
+#print("*"*75)
 
-print(f"Your final sum is {num_sum}")
-
-print("*"*75)
 # Now you will be creating a two operand calculator
 # It will support the following operators: +,-,/,*,% 
 # So accepted input is of the form `operand operator operand` 
@@ -58,5 +56,67 @@ print("*"*75)
     # So, it should function the same for `5 + 6` as `5+6`
 # Print the result of the equation
 # Again, loop through prompting the user for input until `exit` in any casing is input 
+ 
+ # Prompts the user for a positive integer for factorial calculation
+while True:
+    upper_bound = input("Enter a positive integer for factorial calculation: ")
+    if upper_bound.isdigit():  # Check if the input is a positive integer
+        upper_bound = int(upper_bound)
+        factorial = 1
+        while upper_bound > 0:
+            factorial *= upper_bound
+            upper_bound -= 1
+        print(f"The result of the factorial based on the given bound is {factorial}")
+        break
+    else:
+        print("Please enter a valid positive integer.")
 
-        
+print("*" * 75)
+
+# Sums the integers input by user until 'exit' is entered
+num_sum = 0
+while True:
+    user_input = input("Enter an integer to add to sum (or type 'exit' to finish): ")
+    if user_input.lower() == 'exit':
+        break
+    elif user_input.lstrip('-').isdigit():  # Check for both positive and negative numbers
+        num_sum += int(user_input)
+    else:
+        print("Please enter a valid integer.")
+
+print(f"Your final sum is {num_sum}")
+
+print("*" * 75)
+
+# Simple calculator for two operands with supported operators
+while True:
+    expression = input("Enter calculation (e.g., '5 + 3') or type 'exit' to quit: ")
+    if expression.lower() == 'exit':
+        break
+
+    # Remove spaces to make parsing easier
+    expression = expression.replace(" ", "")
+
+    # Finds operator and splits based on it
+    for operator in ['+', '-', '*', '/', '%']:
+        if operator in expression:
+            operand1, operand2 = expression.split(operator)
+            if operand1.isdigit() and operand2.isdigit():  # Check that both operands are numbers
+                operand1, operand2 = int(operand1), int(operand2)
+                if operator == '+':
+                    result = operand1 + operand2
+                elif operator == '-':
+                    result = operand1 - operand2
+                elif operator == '*':
+                    result = operand1 * operand2
+                elif operator == '/':
+                    result = operand1 / operand2
+                elif operator == '%':
+                    result = operand1 % operand2
+                print(f"The result of {operand1} {operator} {operand2} is {result:.0f}") #removes the decimals from the final output
+                break
+            else:
+                print("Please enter valid numerical values for both operands.")
+                break
+    else:
+        print("Invalid input or unsupported operation.")
